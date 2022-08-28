@@ -5,15 +5,15 @@ const { Videogame, Genre } = require('../db');
 //....................PAG PPAL....................// 
 //TRAER JUEGOS DE LA API: 
 const getApiGames = async () => {
-    const apiGames1 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page5`)
+    const apiGames1 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=1`)
 
-    const apiGames2 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page6`)
+    const apiGames2 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=2`)
 
-    const apiGames3 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page7`)
+    const apiGames3 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=7`)
 
-    const apiGames4 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page8`)
+    const apiGames4 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=8`)
 
-    const apiGames5 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page9`)
+    const apiGames5 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=9`)
 
     const apiTotalGames = apiGames1.data.results.concat(
         apiGames2.data.results,
@@ -47,12 +47,12 @@ const getDbGames = async () => {
     })
     return rawGamesDB.map((el) => {
         return {
-            id: el.id,
-            name: el.name,
-            rating: el.rating,
-            background_image: el.background_image,
-            genre: el.genres.map((e) => { e.name }),
-            createdInDb: el.createdInDb
+            id: el.dataValues.id,
+            name: el.dataValues.name,
+            rating: el.dataValues.rating,
+            background_image: el.dataValues.background_image,
+            genre: el.dataValues.genres.map((e) => ( e.dataValues.name )),
+            createdInDb: el.dataValues.createdInDb
         }
     })
 }; 
@@ -63,8 +63,8 @@ const getAllGames = async (req, res) => {
     const gamesApi = await getApiGames();
     const gamesDB = await getDbGames();
     const allGames = gamesApi.concat(gamesDB)
+    return allGames; 
 
-    res.status(200).send(allGames)
 }; 
 
 //....................RUTA ID-GAMES....................// 
@@ -138,18 +138,8 @@ const allGamesID = async (req, res) => {
 //....................GAMES BUSCADOS POR QUERY....................//
 //BÚSQUEDA DB-GAMES: 
 const getGamesDbBySearch = async (name) => {
-    const auxDB = await getDbGames(); 
-    const auxGames = auxDB.map((el) => {
-        return {
-            id: el.id,
-            name: el.name,
-            rating: el.rating,
-            background_image: el.background_image,
-            genre: el.genres.map((e) => { e.name }),
-            createdInDb: el.createdInDb
-        }
-    })
-    const gamesInDbName = auxGames.filter((e) => {
+    const auxDB = await getDbGames();
+    const gamesInDbName = auxDB.filter((e) => {
         e.name.toLowerCase().includes(name.toLowerCase)
     })
     return gamesInDbName; 
@@ -157,7 +147,7 @@ const getGamesDbBySearch = async (name) => {
 
 //BÚSQUEDA API-GAMES: 
 const getGamesApiBySearch = async(name) => {
-    const apiGamesResult = await axios.get(`https://api.rawg.io/api/games?search={game}?key=${APIKEY}`); 
+    const apiGamesResult = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${APIKEY}`);
     const apiGamesBySearch = await apiGamesResult.data?.results.map((e) => {
         return {
             id: e.id, 
@@ -172,12 +162,109 @@ const getGamesApiBySearch = async(name) => {
 }
 
 //API-GAMES & DB-GAMES: 
+const getAllGamesBySearch = async(req, res) => {
+    const name = req.query.name
+    if(name){
+        const gamesApiSearch = await getGamesApiBySearch(name);
+        const gamesDBSearch = await getGamesDbBySearch(name); 
+        const totalGamesSearch = gamesApiSearch.concat(gamesDBSearch); 
+        if(totalGamesSearch.length){
+            res.status(200).send(totalGamesSearch); 
+        }
+        else {
+            res.status(404).send('Videogame not found!'); 
+        }
+    } 
+    else {
+        const totalGames = await getAllGames();
+        res.status(200).send(totalGames); 
+    }
+}
 
+//....................RUTA GAME-POST....................//
+const gamesPost = async(req, res) => {
+        const {
+            name,
+            description,
+            released,
+            rating,
+            background_image,
+            platforms,
+            genre,
+        } = req.body;
+        let genreDb = await Genre.findAll({
+            where : {name: genre}
+        })
+        try{
+        const gameCreate = await Videogame.create({
+            name,
+            description,
+            released, 
+            rating,
+            background_image,
+            platforms,
+            genre, 
+        })
+        gameCreate.addGenre(genreDb)
 
+        res.status(200).send('Videogame created successfylly.')
+    }
+    catch (error){
+        console.log(error); 
+        res.status(400).send('Bad request.')
+    }
+} 
+
+//....................RUTA GAME-DELETE....................//
+const deleteGame = async(req,res) => {
+    try{
+        const id = req.params.id; 
+        const gameExist = await Videogame.findOne({
+            where: {id: id}
+        })
+        if (!gameExist){
+            res.status(404).send("Videogame not found.")
+        }
+        else{
+            await gameExist.destroy(); 
+            res.status(200).send("Videogame deleted successfully.")
+        }
+    } catch(error){
+        res.status(400).send("Bad request.")
+    }
+}
+
+//....................RUTA GAME-PATCH....................//
+const patchGame = async(req, res) => {
+    try{
+        const id = req.params.id; 
+        const updateGame = req.body;
+        const gameExist = await Videogame.findOne({
+            where: {id: id}
+        })
+        if (!gameExist){
+            res.status(404).send("Videogame not found.")
+        }
+        else {
+            const aux = await gameExist.update(
+                { name: updateGame.name }
+                );
+                console.log({ aux });
+            res.status(200).send("Videogame modified successfully!")
+        }
+    } catch (error){
+        console.log(error)
+    }
+}
 
 
 
 module.exports = {
-    getAllGames,
-    allGamesID
+    // getAllGames,
+    allGamesID,
+    getAllGamesBySearch,
+    gamesPost,
+    deleteGame,
+    patchGame
+
 }
