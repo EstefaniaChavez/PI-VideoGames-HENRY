@@ -5,6 +5,7 @@ const { Videogame, Genre } = require('../db');
 //....................PAG PPAL....................// 
 //TRAER JUEGOS DE LA API: 
 const getApiGames = async () => {
+    try{
     const apiGames1 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=1`)
 
     const apiGames2 = await axios.get(`https://api.rawg.io/api/games?key=${APIKEY}&page=2`)
@@ -28,10 +29,13 @@ const getApiGames = async () => {
             name: el.name,
             rating: el.rating,
             background_image: el.background_image,
-            genre: el.genres.map((e) => e.name),
+            genres: el.genres.map((e) => e.name),
         }
     })
     return apiGames;
+} catch(error){
+    console.log(error)
+}
 }
 
 //JUEGOS TRAIDO DE LA DB: 
@@ -51,7 +55,7 @@ const getDbGames = async () => {
             name: el.dataValues.name,
             rating: el.dataValues.rating,
             background_image: el.dataValues.background_image,
-            genre: el.dataValues.genres.map((e) => ( e.dataValues.name )),
+            genres: el.dataValues.genres.map((e) => ( e.dataValues.name )),
             createdInDb: el.dataValues.createdInDb
         }
     })
@@ -79,17 +83,19 @@ const idGame = async(id) => {
             released: apiGamesURL.data.released, 
             rating: apiGamesURL.data.rating, 
             background_image: apiGamesURL.data.background_image, 
-            gerne: apiGamesURL.data.genres.map((e) => e.name), 
+            genres: apiGamesURL.data.genres.map((e) => e.name),
+            // name_original: apiGamesURL.data.name_original,
             platforms: 
                 apiGamesURL.data.platfoms === null || apiGamesURL.data.platforms === 0
                 ? "Platforms aren't specified." 
                 : apiGamesURL.data.platforms.map((el) => el.platform.name), 
         }
+        console.log('aquiiiiii', apiGames)
         return apiGames;
 
     } catch(error) {
-        console.log(error)
-        return {} 
+        console.log('Error ->',error)
+        return false
     }
 }
 
@@ -110,13 +116,14 @@ const gameDBId = async (id) => {
                 released: prevData.released, 
                 rating: prevData.rating, 
                 background_image: prevData.background_image, 
-                genre: prevData.genres.map((e) => e.name), 
+                genres: prevData.genres.map((e) => e.name), 
                 platforms: prevData.platforms, 
-                createdInDb: prevData.createdInDb
+                createdInDb: prevData.createdInDb,
+
             }
         }catch (error){
-            console.log(error)
-            return {}
+            console.log('Error ->',error)
+            return false
         }
 }
 
@@ -125,12 +132,15 @@ const allGamesID = async (req, res) => {
     const id = req.params.id
     const gameApi = await idGame(id);
     const gameDB = await gameDBId(id);
-    
+    console.log('->', gameApi);
+    console.log('->', gameDB);
     if (!gameApi && !gameDB){
-        res.status(404).send('Game Not Found!')
-    } else if (!gameApi){
+        res.status(404).send('Game Not Found!') 
+    } else if (!gameApi && gameDB){
+        console.log('game db');
         res.status(200).send(gameDB)
     } else {
+        console.log('game api');
         res.status(200).send(gameApi)
     }
 } 
@@ -139,9 +149,10 @@ const allGamesID = async (req, res) => {
 //BÚSQUEDA DB-GAMES: 
 const getGamesDbBySearch = async (name) => {
     const auxDB = await getDbGames();
-    const gamesInDbName = auxDB.filter((e) => {
-        e.name.toLowerCase().includes(name.toLowerCase)
-    })
+    console.log('aux db', auxDB)
+    const gamesInDbName = auxDB.filter((e) => 
+        e.name.toLowerCase().includes(name.toLowerCase())
+    )
     return gamesInDbName; 
 }
 
@@ -154,7 +165,7 @@ const getGamesApiBySearch = async(name) => {
             name: e.name, 
             rating: e.rating, 
             background_image: e.background_image, 
-            genre: e.genres.map((el) => {el.name}), 
+            genres: e.genres.map((el) => {el.name}), 
         }
     }) 
     const apiGamesBySearchLimit = apiGamesBySearch.slice(0, 15); 
@@ -190,27 +201,28 @@ const gamesPost = async(req, res) => {
             rating,
             background_image,
             platforms,
-            genre,
+            genres,
         } = req.body;
-        let genreDb = await Genre.findAll({
-            where : {name: genre}
-        })
         try{
-        const gameCreate = await Videogame.create({
+            console.log('Here', req.body);
+            const gameCreate = await Videogame.create({
             name,
             description,
             released, 
             rating,
             background_image,
             platforms,
-            genre, 
         })
-        gameCreate.addGenre(genreDb)
+        for(let g of genres){
+            let genreDb = await Genre.findOne({
+                where : {name: g}
+            })
+            gameCreate.addGenre(genreDb)
+        }
 
         res.status(200).send('Videogame created successfylly.')
     }
     catch (error){
-        console.log(error); 
         res.status(400).send('Bad request.')
     }
 } 

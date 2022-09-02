@@ -1,7 +1,9 @@
 
 const initialState = {
     videogames : [],
-    allVideogames: [], 
+    allVideogames: [],
+    genres: [],
+    detail: {}, 
 }
 
 
@@ -14,12 +16,26 @@ function rootReducer(state = initialState, action) {
                 videogames: action.payload,
                 allVideogames: action.payload,
             }
+        case 'GET_NAME_VIDEOGAMES':
+            return{
+                ...state, 
+                videogames: action.payload
+            }
+        case 'POST_VIDEOGAMES':
+            return {
+                ...state,
+            }
+        case 'GET_GENRES':
+            return{
+                ...state,
+                genres: action.payload
+            }
         case 'FILTER_BY_GENRE':
             const allVideogames = state.allVideogames
             console.log('videojuegos 0', allVideogames)
             const genreFiltered = action.payload === 'All' 
                                 ? allVideogames 
-                                : allVideogames.filter(e => e.genre.includes(action.payload))
+                                : allVideogames.filter(e => e.genres.includes(action.payload))
             return {
                 ...state, 
                 videogames: genreFiltered
@@ -60,7 +76,41 @@ function rootReducer(state = initialState, action) {
                                 ...state, 
                                 videogames: sortedAdd
                             }
-        
+        case 'ORDER_BY_RATING': 
+        console.log('videojuegos', state.videogames)
+            const sortAdd = action.payload === 'Worst' 
+                            ? state.videogames.sort(function(a,b){
+                                if (a.rating > b.rating){
+                                    return 1; 
+                                }
+                                if (b.rating > a.rating){
+                                    return -1; 
+                                }
+                                    return 0; 
+                                })
+                            : state.videogames.sort(function(a,b){
+                                if (a.rating > b.rating){
+                                    return -1
+                                }
+                                if (b.rating > a.rating){
+                                    return 1; 
+                                } 
+                                    return 0; 
+                                })
+                                return {
+                                    ...state, 
+                                    videogames: sortAdd
+                                }
+        case 'GET_VIDEOGAMES_NAME':
+            return{
+                ...state,
+                detail: action.payload
+            }
+        case 'RESET_DETAIL':
+            return{
+                ...state, 
+                detail:{}
+            }
         default:
             return state;
     }

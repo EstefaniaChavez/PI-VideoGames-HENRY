@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+.li_paginado{
+    margin: 20px;
+    list-style: none;
+    color:#e901e9;
+    border-color: #e405e4;
+    background-color: black;
+    height: 30px;
+    width: 30px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+}
+.li_paginado:hover{
+    background: #a945c7; 
+    box-shadow: 0 0 20px #a945c7;
+    transition-delay: 0.1s; 
+    transition: 0.4s;
+    color: #5f007c;
+    border: 1px solid #a945c7;
+    font-weight: 700; 
+    transform: scale(1.05);
+}
+
+.ul_paginado{
+   display: flex;
+   justify-content: center;
+
+}

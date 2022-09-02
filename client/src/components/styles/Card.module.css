@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Roboto+Slab:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+.divppal_card{
+    padding: 0;
+    height: 300px;
+    width: 200px;
+    border: 5px #3c005a solid;
+    background-color: black;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.8s;
+}
+.divppal_card:hover{
+    border-color: #cc11cc;
+    transform: scale(1.05);
+    color:#cc11cc;
+    box-shadow: 0 0 10px #cc11cc, 0 0 20px #cc11cc, 0 0 30px #cc11cc, 0 0 50px #cc11cc; 
+    transition-delay: 0.1s;
+}
+
+.h3_card{
+    font-family:'Kanit', sans-serif;
+    text-decoration: none; 
+    color:#8903cc;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;  
+}
+.divppal_card:hover > .h3_card{
+    transform: scale(1.10);
+    color:#cc11cc;
+    transition: transform 0.8s;
+}
+.divppal_card:hover > .h5_genres_card{
+    transform: scale(1.05);
+    transition: transform 0.8s;
+    color:#fd0e72;
+}
+.divppal_card:hover > .h5_rating_card{
+    transform: scale(1.05);
+    transition: transform 0.8s;
+    color:#e40a77;
+}
+.divppal_card:hover > .img_card{
+    transform: scale(1.05);
+    transition: transform 0.8s;
+    border: 2px solid #cc11cc;
+}
+.h5_rating_card{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 0;
+    margin-left: 135px;
+    font-family:'Kanit', sans-serif;
+    font-size: 25px;
+    color:#e9ac3a;
+    /* border:#e9ac3a 1px solid; */
+}
+.h5_genres_card{
+    color: #800080; 
+    font-family: 'Kanit', sans-serif;
+    margin-top: 10px; 
+    font-size: 15px; 
+}
+.img_card{
+    margin-top: 10px;
+    height: 120px;
+    width: 90%; 
+    border-radius: 5%;
+    border: 3px #3c005a solid;
+    object-fit: cover;
+}
+
+
+/* colores 
+#800080 rosa mas o menos claro
+#550080 violeta mas o menos claro
+#3c005a violeta oscuro
+#eabfff rosa pálido
+#d580ff rosa mas ocuro que el palido de arriba */

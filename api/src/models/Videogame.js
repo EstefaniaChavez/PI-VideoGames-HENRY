@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // name_original: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
     description:{
       type: DataTypes.TEXT,
       allowNull: false,
@@ -31,7 +35,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     background_image:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true, 
     },
     createdInDb: {

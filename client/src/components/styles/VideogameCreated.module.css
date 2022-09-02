@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+.link_home_videogamecreate {
+    margin-top: 25px;
+    width: 120px;
+    height: 40px;
+    margin-left: 1180px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    color: #9513d6;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.link_home_videogamecreate:hover {
+    background: #a945c7;
+    box-shadow: 0 0 20px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #5f007c;
+    border: 1px solid #a945c7;
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.h1_videogamecreate {
+    font-family: 'Cinzel', serif;
+    color: #3c005a;
+    -webkit-text-stroke: 1px #840cc0;
+    margin-left: 30px;
+}
+
+.label_videogamecreate {
+    color: #e405e4;
+    font-family: 'Kanit', sans-serif;
+    display: block;
+}
+
+.inputcreate_videogamecreate {
+    width: 250px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    height: 30px;
+    color: #f395f3;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    border: 2px solid #e405e4;
+    font-size: 20px;
+}
+
+.divcreate_videogamecreate {
+    display: inline;
+}
+
+.form_videogamecreate {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.button_videogamescreate {
+    width: 250px;
+    height: 37px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    color: #9513d6;
+    box-shadow: 0 0 10px #a945c7;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    transition: 0.2s;
+    margin-top: 20px;
+    margin-left: 165px;
+}
+
+.button_videogamescreate:hover {
+    background: black;
+    box-shadow: 0 0 10px #a945c7, 0 0 30px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #bf1df0;
+    border: 1px solid #c52ff3;
+    font-weight: 700;
+
+}
+
+.errors_videogamecreate {
+    color: red;
+    font-family: 'Kanit', sans-serif;
+    text-decoration: solid 1px red;
+}
+
+.div_inputs_videogamecreate {
+    width: 120px;
+    height: 40px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h4_input_videogamecreate {
+    font-family: 'Kanit', sans-serif;
+    color: #f395f3;
+    font-size: 20px;
+
+}
+
+.button_input_videogamecreate {
+    width: 30px;
+    height: 20px;
+    background-color: #e405e4;
+    font-size: 15px;
+    font-weight: 700;
+    border-color: #530353;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.button_input_videogamecreate:hover {
+    color: #c507ff;
+    border-color: #c507ff;
+    background-color: black;
+    transform: scale(1.05);
+}

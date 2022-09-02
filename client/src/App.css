@@ -1,4 +1,21 @@
 .App {
+  background: url('../src/images/fondo_landing_3.jpg'); 
+  background-color: black;
+  background-position: center;
+  background-repeat: repeat;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  z-index: 0;
+  margin: 0; 
+  padding:0; 
+  border: 0; 
+  display: block; 
+  height: 100vh;
+  background-repeat: repeat-y;
+
+  background-color: black;
   text-align: center;
 }
 

@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+.divconteiner_videogamedetail{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+.divppal_detail{
+    display: flex;
+    justify-content: center;
+}
+.link_home_videogamedetail{
+    margin-top: 5px;
+    width: 120px;
+    height: 40px;
+    margin-left: 1180px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    color: #9513d6;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.link_home_videogamedetail:hover {
+    background: #a945c7;
+    box-shadow: 0 0 20px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #5f007c;
+    border: 1px solid #a945c7;
+    font-weight: 700;
+    transform: scale(1.05);
+}
+.asidefirst_details{
+    height: 800px;
+    width: 500px;
+    margin: 40px;
+    margin-left: 20px;
+}
+.h1_videogamedetail{
+    font-family: 'Cinzel', serif;
+    color: #1d0329;
+    /* -webkit-text-stroke: 1px #840cc0; */
+    /* display:flex ; */
+    font-size: 30px;
+    margin-left: -70px;
+    margin-bottom: 5px;
+    letter-spacing: 3px;
+    text-shadow:2px  0px 0px #db03ac,
+                0px  2px 0px #db03ac,
+                -2px  0px 0px #db03ac,
+                0px -2px 0px #db03ac;
+}
+.img_videogamedetail{
+    height: 200px;
+    width: 400px;
+    object-fit: cover;
+    border: 10px inset #a303a3;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.aside_details{
+    display: flex; 
+    flex-direction: column;
+    width: 50%;
+    height: 500px;
+    margin-left: 50px;
+    background-color: black;
+    margin: 50px;
+}
+.h2genre_details{
+    color:#a303a3;
+    font-family:'Kanit', sans-serif; 
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 0px;
+}
+.p_genres_details{
+    margin-top: 0; 
+    margin-left: 10px;
+    font-family:'Kanit', sans-serif; 
+    font-size: 30px;
+    color: #5a0494;
+}
+.h2_desc_details{
+    color:#a303a3;
+    font-family:'Kanit', sans-serif; 
+    font-size: 30px;
+    margin-left: -450px; 
+    margin-top: 0px;
+}
+.p_desc_details{
+    margin-top: 0px; 
+    margin-left: 15px;
+    font-family:'Kanit', sans-serif; 
+    font-size: 17px;
+    color: #5a0494;
+    text-align: justify;
+}
+.p_plat_details{
+    margin-top: 0; 
+    margin-left: 10px;
+    font-family:'Kanit', sans-serif; 
+    font-size: 30px;
+    color: #5a0494;
+    text-align: left;
+}
+.p_rating_details{
+    margin-top: 0; 
+    margin-left: 10px;
+    font-family:'Kanit', sans-serif; 
+    font-size: 30px;
+    color: #e9ac3a;
+    font-weight: 700;
+    text-align: left;
+}
+
+.spinner {
+    border: 10px solid #e901e93f;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-left-color: #e405e4;
+    animation: spin 2s linear infinite;
+    box-shadow: inset 0 0 0.5em 0 #fd29fd, 0 0 0.5em 0 #fd29fd;
+    margin-top: 100px; 
+    margin-left: 565px;
+    background-color: black;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

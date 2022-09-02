@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+
+.divppal_filter_home {
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.h1_titulo_home {
+    font-family: 'Cinzel', serif;
+    color: #3c005a;
+    -webkit-text-stroke: 1px #840cc0;
+    margin-left: 30px;
+    background-color: black;
+}
+
+.div_superior_home {
+    display: flex;
+    background-color: black;
+}
+
+.card_home {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.onecard_home {
+    margin: 20px
+}
+
+.linkcard_home {
+    text-decoration: none;
+    display: flex;
+    align-items: unset;
+}
+
+.allgames_home {
+    margin-top: 25px;
+    width: 120px;
+    height: 40px;
+    margin-left: 20px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    color: #9513d6;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: 0.2s;
+    cursor: pointer; 
+}
+
+.allgames_home:hover {
+    background: #a945c7;
+    box-shadow: 0 0 20px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #5f007c;
+    border: 1px solid #a945c7;
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.creategames_home {
+    margin-right: 10px;
+    margin-top: 25px;
+    width: 120px;
+    height: 25px;
+    margin-left: 800px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: #9513d6;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+.creategames_home:hover {
+    background: #a945c7;
+    box-shadow: 0 0 20px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #5f007c;
+    border: 1px solid #a945c7;
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.filters_order_home {
+    width: 160px;
+    height: 30px;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 18px;
+    border: 2px solid #e405e4;
+    color: #e405e4;
+    display: flex;
+    align-self: center;
+}
+
+.spinner {
+    border: 10px solid #e901e93f;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-left-color: #e405e4;
+    animation: spin 2s linear infinite;
+    box-shadow: inset 0 0 0.5em 0 #fd29fd, 0 0 0.5em 0 #fd29fd;
+    margin-top: 100px;
+    margin-left: 565px;
+    background-color: black;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.button_subir_home {
+    width: 100px;
+    height: 37px;
+    border-radius: 10%;
+    background-color: black;
+    font-family: 'Kanit', sans-serif;
+    font-size: 20px;
+    color: #9513d6;
+    box-shadow: 0 0 10px #a945c7;
+    border: 2px solid #9513d6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    transition: 0.2s;
+    margin-left: 25px;
+    cursor: pointer; 
+}
+
+.button_subir_home:hover {
+    background: black;
+    box-shadow: 0 0 10px #a945c7;
+    transition-delay: 0.1s;
+    transition: 0.4s;
+    color: #bf1df0;
+    border: 1px solid #c52ff3;
+    font-weight: 700;
+}
