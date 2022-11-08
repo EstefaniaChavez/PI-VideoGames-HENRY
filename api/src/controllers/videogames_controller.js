@@ -188,6 +188,7 @@ const getAllGamesBySearch = async(req, res) => {
     } 
     else {
         const totalGames = await getAllGames();
+        // console.table(totalGames)
         res.status(200).send(totalGames); 
     }
 }
